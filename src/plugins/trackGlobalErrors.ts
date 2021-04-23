@@ -83,10 +83,10 @@ export default <ReactotronSubtype = ReactotronCore>(options: TrackGlobalErrorsOp
         symbolicateStackTrace ||
         require("react-native/Libraries/Core/Devtools/symbolicateStackTrace")
       if (parseErrorStack && symbolicateStackTrace) {
-        const parsedStacktrace = parseErrorStack(error)
+        const parsedStacktrace = parseErrorStack(error.stack)
 
         symbolicateStackTrace(parsedStacktrace).then(goodStack => {
-          let stack = goodStack.map(stackFrame => ({
+          let stack = goodStack.stack.map(stackFrame => ({
             fileName: stackFrame.file,
             functionName: stackFrame.methodName,
             lineNumber: stackFrame.lineNumber,
